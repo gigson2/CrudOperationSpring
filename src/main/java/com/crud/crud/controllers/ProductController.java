@@ -3,6 +3,7 @@ package com.crud.crud.controllers;
 import com.crud.crud.models.Product;
 import com.crud.crud.services.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class ProductController {
     // create the method that allows you to read (view/show rows from the product table in the crud database)
     @GetMapping({"","/"})
     public String viewProduct(Model model){
-        List<Product> products = repo.findAll();
+        List<Product> products = repo.findAll(Sort.by(Sort.Direction.DESC,"id"));
         model.addAttribute("products",products);
         return "products/index";
     }
